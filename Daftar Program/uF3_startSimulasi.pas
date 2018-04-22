@@ -46,7 +46,7 @@ implementation
 	begin	
 		dataSimulasi.itemKe[ID].jumlahEnergi	:= 10;
 		dataSimulasi.itemKe[ID].jumlahHariHidup	:= 1;
-		dataSimulasi.itemKe[ID].jumlahDuit		:= 2000000;
+		dataSimulasi.itemKe[ID].jumlahDuit		:= 100000;
 		dataInventoriBahanOlahan.banyakItem		:= 0;
 		jmlMakan := 0;
 		jmlIstirahat := 0;
@@ -62,10 +62,10 @@ implementation
 			{antarmuka}
 			writeln('--------------------------------------------------');
 			writeln('Selamat pagi!, hari ini tanggal: ',dataSimulasi.itemKe[ID].tanggalSimulasi.hari,'/',dataSimulasi.itemKe[ID].tanggalSimulasi.bulan,'/',dataSimulasi.itemKe[ID].tanggalSimulasi.tahun);
-			writeln('Sisa Energi		: ', dataSimulasi.itemKe[ID].jumlahEnergi);
-			writeln('Sisa Uang		: ', dataSimulasi.itemKe[ID].jumlahDuit);
-			writeln('Jumlah Makan		: ', jmlMakan);
-			writeln('Jumlah Istirahat	: ', jmlIstirahat);
+			writeln('Sisa Energi     : ', dataSimulasi.itemKe[ID].jumlahEnergi);
+			writeln('Sisa Uang       : ', dataSimulasi.itemKe[ID].jumlahDuit);
+			writeln('Jumlah Makan    : ', jmlMakan);
+			writeln('Jumlah Istirahat: ', jmlIstirahat);
 			writeln('--------------------------------------------------');
 			
 			write('>> '); readln(perintah);

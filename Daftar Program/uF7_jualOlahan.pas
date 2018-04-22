@@ -35,6 +35,8 @@ implementation
 			BO.jumlahTersedia:=BO.jumlahTersedia-n;
 			dataSimulasi.itemKe[ID].jumlahDuit:=dataSimulasi.itemKe[ID].jumlahDuit+(dataBahanOlahan.itemKe[iBO].hargaJual*n);
 			dec(dataSimulasi.itemKe[ID].jumlahEnergi);
+			inc(dataSimulasi.itemKe[ID].totalBahanOlahanDijual);
+			dataSimulasi.itemKe[ID].totalPemasukan:=dataSimulasi.itemKe[ID].totalPemasukan+dataBahanOlahan.itemKe[iBO].hargaJual;
 			writeln('Bahan olahan ',dataBahanOlahan.itemKe[iBO].nama,' telah dijual!');
 			end
 		else if not(found) then
@@ -44,12 +46,3 @@ implementation
 	end;
 
 end.
-
-{ TIPS DAN CARA MEMPROGRAM DARI UNIT
-* 1. Buat I.S dan F.S sebaik mungkin sehingga orang lain bisa tau maksud program lu tanpa harus ngebaca implementasinya
-* 2. Keterangan : I.S(initial state); F.S(final state)
-* 3. Jangan mengubah uP0_utama.pas, kalo mau ngetest file ini, silahkan "uncomment" HANYA "mainNamaTemplate()" di uP0_utama.pas atau uF3_startSimulasi.pas
-* 4. Kalo mau butuh fungsi atau prosedur topik umum kaya updateTanggal(x) dan sejenisnya, silahkan request ke gue atau bikin sendiri di uP3_umum.pas
-* 5. Silahkan perhatikan baik-baik untup tipedata bentukan di uP1_tipeBentukan.pas
-* 
-* }

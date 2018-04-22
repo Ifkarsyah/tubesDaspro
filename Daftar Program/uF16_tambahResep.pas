@@ -83,7 +83,9 @@ end;
 			end;
 		end;
 		
+////////////////////		
 // PROSEDUR UTAMA //
+////////////////////
 	procedure mainTambahResep(ID : integer;
 									var dataBahanMentah : tabelBahanMentah; 
 									var dataBahanOlahan : tabelBahanOlahan; 
@@ -95,12 +97,11 @@ end;
 	{Kamus Lokal}
 	var
 		nama : string; {nama resep baru yg dimasukin}
-		s : string; {String panjang bahan-bahan masakan}
-		dataTemp : tabelString;
 		found : boolean;
-		i , j : integer; {pencacah}
+		i , j ,k : integer; {pencacah}
+		n : integer; {jumlah bahan resep}
 		
-	{Algoritma}	
+	{Algoritma}
 begin
 	repeat
 		write('Nama resep :'); readln(nama);
@@ -110,40 +111,44 @@ begin
 		end;
 	until (isResepExist(nama,dataResep)=false);
 	
-	write('Bahan-bahan resep :');
-	readln(s);
-	ambilBaris(s,dataTemp);
-	
-			
-	if (dataTemp.banyakItem < 2 ) then {banyak item penyusun resep harus >= 2}
-	begin	
-		writeln('Item kurang dari 2');
-	end else
-	
-	begin
-		for i:=1 to dataTemp.banyakItem do		
+	repeat
+		writeln('Masukkan jumlah bahan resep');
+		readln(n);
+		if n<2 then
 		begin
-			dataResep.itemKe[ID].bahan[i]:=dataTemp.itemKe[i];
+			writeln('Jumlah bahan resep tidak boleh kurang dari 2!');
 		end;
-		
-		found:=true;
-		
-		while (found=false) do
-		begin
-			for i:=1 to dataResep.banyakItem do
-				begin
-					for j:=1 to dataInventoriBahanMentah.banyakItem do
-					begin
-						if dataResep.itemKe[ID].bahan[i]=dataInventoriBahanMentah.itemKe[j].nama then
-							found:=true;
-					end;
-			end;
+	until (n>=2);
+	
+	for k:=1 to n do
+	i:=1;
+	begin
+		writeln('Masukkan nama bahan ke ',k);
+		repeat 
+			readln(nama);
+			found := false;
+			{lalu dilakukan validasi apakah nama bahan resep ada di tabel nama inventori bahan mentah/olahan}
 			
-			
-		end;		
+			while (found=false) do
+			begin
+				for j:=1 to dataBahanMentah.banyakItem do
+				begin {dicek dulu, siapa tau nama bahan terbut ada di data inventori bahan mentah}
+					if dataBahanMentah.itemKe[ID].nama[j]=nama then
+					found:=true;
+				end;
 				
-			if found=false then
-				writeln('Item tersebut tidak ada, masukan item yang lain!');	
+				for j:=1 to dataBahanOlahan.banyakItem do
+				begin
+					if dataBahanOlahan.itemKe[ID].nama[j]=nama then
+					found:=true;
+				end;
+				writeln('Bahan tersebut tidak ada, silahkan masukkan nama bahan lain!');
+			end;
+		until (found=true);
+		
+		dataResep.itemKe[ID].bahan[i]:=nama;
+		i:=i+1;
+	end;
 			
 			repeat 
 				write('Harga jual resep :'); read(dataResep.itemKe[ID].hargaJual);
@@ -153,7 +158,6 @@ begin
 					writeln('Harga jual minimum harus 12,5% lebih tinggi dari harga modal!'); {proses validasi harga jual resep tersebut}
 				end;
 			until ((dataResep.itemKe[ID].hargaJual >= (0.125 * hitungHargaModalResep(ID,dataBahanMentah,dataBahanOlahan,dataResep,dataInventoriBahanMentah))));	
-	end;
-end;	
+end;
 
 end.
