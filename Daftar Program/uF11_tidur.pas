@@ -12,17 +12,16 @@ uses uP1_tipeBentukan, uP3_Umum, uB4_restock;
 	* F.S : energi bertambah sampai menjadi 10, hari berganti}
 	
 	procedure resetDay(var tgl : tanggal;var energy : integer;var hariHidup : integer;var jmlMakan : integer; var jmlIstirahat : integer);
-	{ I.S : tgl adalah tgl hari ini, energi adalah energi yang tersisa hari ini, dan begitu juga hariHidup
-	* F.S : tanggal berubah menjadi tanggal besok, energi berubah menjadi 10, dan hariHidup bertambah 1 dari sebelumnya}
+	{ Mereset data simulasi dan memajukan tanggal }
 
 	procedure hapusKadaluarsa(var dataInventoriBahanMentah : tabelBahanMentah; var dataInventoriBahanOlahan : tabelBahanOlahan; var ID : integer; var dataSimulasi : tabelSimulasi);
-	
+	{ Menghapus bahan yang kadaluarsa }
 	
 	procedure hapusDataBM(var dataInventoriBahanMentah : tabelBahanMentah; index : integer);
-	
+	{ Menghapus sebuah bahan mentah dari array inventori bahan mentah }
 	
 	procedure hapusDataBO(var dataInventoriBahanOlahan : tabelBahanOlahan; index : integer);
-
+	{ Menghapus sebuah bahan olahan dari array inventori bahan mentah }
 	
 	
 implementation
@@ -51,9 +50,9 @@ implementation
 	end;
 
 	procedure resetDay(var tgl : tanggal;var energy : integer;var hariHidup : integer;var jmlMakan : integer; var jmlIstirahat : integer);
-	{me-reset hari}
+	{Mereset data simulasi dan memajukan tanggal}
 	begin
-		updateTanggal(tgl); {Bagian ini harus diperbaiki agar sesuai sistem kalendar(update->sudah ya :D)}
+		updateTanggal(tgl); 
 		energy:=10;
 		hariHidup:=hariHidup+1;
 		jmlMakan:=0;
@@ -61,6 +60,7 @@ implementation
 	end;
 	
 	procedure hapusKadaluarsa(var dataInventoriBahanMentah : tabelBahanMentah; var dataInventoriBahanOlahan : tabelBahanOlahan; var ID : integer; var dataSimulasi : tabelSimulasi);
+	{Menghapus bahan yang kadaluarsa}
 	var
 	i : integer;
 	now, kdl : tanggal;
@@ -118,6 +118,7 @@ implementation
 	end;
 
 	procedure hapusDataBM(var dataInventoriBahanMentah : tabelBahanMentah; index : integer);
+	{Menghapus sebuah data bahan mentah dari data inventori bahan mentah}
 	var
 	i, j: integer;
 	
@@ -135,6 +136,7 @@ implementation
 	end;
 	
 	procedure hapusDataBO(var dataInventoriBahanOlahan : tabelBahanOlahan; index : integer);
+	{Menghapus sebuah data bahan mentah dari data inventori bahan mentah}
 	var
 	i, j: integer;
 	
