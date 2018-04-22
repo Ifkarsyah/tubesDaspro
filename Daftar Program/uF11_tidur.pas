@@ -15,6 +15,16 @@ uses uP1_tipeBentukan, uP3_Umum, uB4_restock;
 	{ I.S : tgl adalah tgl hari ini, energi adalah energi yang tersisa hari ini, dan begitu juga hariHidup
 	* F.S : tanggal berubah menjadi tanggal besok, energi berubah menjadi 10, dan hariHidup bertambah 1 dari sebelumnya}
 
+	procedure hapusKadaluarsa(var dataInventoriBahanMentah : tabelBahanMentah; var dataInventoriBahanOlahan : tabelBahanOlahan; var ID : integer; var dataSimulasi : tabelSimulasi);
+	
+	
+	procedure hapusDataBM(var dataInventoriBahanMentah : tabelBahanMentah; index : integer);
+	
+	
+	procedure hapusDataBO(var dataInventoriBahanOlahan : tabelBahanOlahan; index : integer);
+
+	
+	
 implementation
 
 	procedure mainTidur(dataBahanMentah : tabelBahanMentah;
@@ -32,11 +42,11 @@ implementation
 		end
 		else
 		begin
-			//hapusKadaluarsa(dataInventoriBahanMentah, dataInventoriBahanOlahan, ID); TO DO : BIKIN
 			resetDay(dataSimulasi.itemKe[ID].tanggalSimulasi, dataSimulasi.itemKe[ID].jumlahEnergi, dataSimulasi.itemKe[ID].jumlahHariHidup, jmlMakan, jmlIstirahat);
 			//mengecek untuk melakukan restock atau tidak
 			if(dataSimulasi.itemKe[ID].jumlahHariHidup mod 3 = 0) then
 				mainRestock(ID, dataSimulasi, dataBahanMentah, dataInventoriBahanMentah);
+			hapusKadaluarsa(dataInventoriBahanMentah, dataInventoriBahanOlahan, ID, dataSimulasi);
 		end;
 	end;
 
@@ -49,5 +59,96 @@ implementation
 		jmlMakan:=0;
 		jmlIstirahat := 0;
 	end;
+	
+	procedure hapusKadaluarsa(var dataInventoriBahanMentah : tabelBahanMentah; var dataInventoriBahanOlahan : tabelBahanOlahan; var ID : integer; var dataSimulasi : tabelSimulasi);
+	var
+	i : integer;
+	now, kdl : tanggal;
+	
+	begin
+	now:=dataSimulasi.itemKe[ID].tanggalSimulasi;
+	i:=1;
+	while (i<=dataInventoriBahanMentah.banyakItem) do
+		begin
+		kdl:=dataInventoriBahanMentah.itemKe[i].tanggalKadaluarsa;
+		if now.tahun > kdl.tahun then
+			begin
+			writeln('Bahan mentah ',dataInventoriBahanMentah.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBM(dataInventoriBahanMentah,i);
+			dec(i);
+			end
+		else if (now.tahun = kdl.tahun) and (now.bulan > kdl.bulan) then
+			begin
+			writeln('Bahan mentah ',dataInventoriBahanMentah.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBM(dataInventoriBahanMentah,i);
+			dec(i);
+			end
+		else if (now.tahun = kdl.tahun) and (now.bulan = kdl.bulan) and (now.hari >= kdl.hari) then
+			begin
+			writeln('Bahan mentah ',dataInventoriBahanMentah.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBM(dataInventoriBahanMentah,i);
+			dec(i);
+			end;
+		i:=i+1;
+		end;
+	i:=1;
+		while (i<=dataInventoriBahanOlahan.banyakItem) do
+		begin
+		kdl:=dataInventoriBahanOlahan.itemKe[i].tanggalKadaluarsa;
+		if now.tahun > kdl.tahun then
+			begin
+			writeln('Bahan olahan ',dataInventoriBahanOlahan.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBO(dataInventoriBahanOlahan,i);
+			dec(i);
+			end
+		else if (now.tahun = kdl.tahun) and (now.bulan > kdl.bulan) then
+			begin
+			writeln('Bahan olahan ',dataInventoriBahanOlahan.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBO(dataInventoriBahanOlahan,i);
+			dec(i);
+			end
+		else if (now.tahun = kdl.tahun) and (now.bulan = kdl.bulan) and (now.hari >= kdl.hari) then
+			begin
+			writeln('Bahan olahan ',dataInventoriBahanOlahan.itemKe[i].nama,' telah kadaluarsa');
+			hapusDataBO(dataInventoriBahanOlahan,i);
+			dec(i);
+			end;
+		i:=i+1;
+		end;
+	end;
 
+	procedure hapusDataBM(var dataInventoriBahanMentah : tabelBahanMentah; index : integer);
+	var
+	i, j: integer;
+	
+	begin
+	for i:=(index+1) to dataInventoriBahanMentah.banyakItem do
+	begin
+	dataInventoriBahanMentah.itemKe[i-1]:=dataInventoriBahanMentah.itemKe[i];
+	end;
+	j:=dataInventoriBahanMentah.banyakItem;
+	dataInventoriBahanMentah.itemKe[j].nama:='';
+	dataInventoriBahanMentah.itemKe[j].hargaBeli:=0;
+	dataInventoriBahanMentah.itemKe[j].durasiKadaluarsa:=0;
+	dataInventoriBahanMentah.itemKe[j].jumlahTersedia:=0;
+	dec(dataInventoriBahanMentah.banyakItem);
+	end;
+	
+	procedure hapusDataBO(var dataInventoriBahanOlahan : tabelBahanOlahan; index : integer);
+	var
+	i, j: integer;
+	
+	begin
+	for i:=(index+1) to dataInventoriBahanOlahan.banyakItem do
+	begin
+	dataInventoriBahanOlahan.itemKe[i-1]:=dataInventoriBahanOlahan.itemKe[i];
+	end;
+	j:=dataInventoriBahanOlahan.banyakItem;
+	dataInventoriBahanOlahan.itemKe[j].nama:='';
+	dataInventoriBahanOlahan.itemKe[j].hargaJual:=0;
+	dataInventoriBahanOlahan.itemKe[j].durasiKadaluarsa:=0;
+	dataInventoriBahanOlahan.itemKe[j].jumlahTersedia:=0;
+	dec(dataInventoriBahanOlahan.banyakItem);
+	end;
+	
 end.
