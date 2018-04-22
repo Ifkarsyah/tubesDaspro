@@ -63,7 +63,11 @@ implementation
 			begin
 			write(dataBahanOlahan.itemKe[i].nama,'<-- ');
 			for j:=1 to dataBahanOlahan.itemKe[i].banyakBahanBaku do
-			write(dataBahanOlahan.itemKe[i].bahanBaku[j],' ');
+			begin
+				write(dataBahanOlahan.itemKe[i].bahanBaku[j],' ');
+				if j<dataBahanOlahan.itemKe[i].banyakBahanBaku then
+				write('+ ');
+			end;
 			writeln();
 			end;
 		writeln('Ketik cancel untuk  membatalkan');
