@@ -63,10 +63,20 @@ implementation
 			begin
 			write(dataBahanOlahan.itemKe[i].nama,'<-- ');
 			for j:=1 to dataBahanOlahan.itemKe[i].banyakBahanBaku do
-			write(dataBahanOlahan.itemKe[i].bahanBaku[j],' ');
+			begin
+				write(dataBahanOlahan.itemKe[i].bahanBaku[j],' ');
+				if j<dataBahanOlahan.itemKe[i].banyakBahanBaku then
+				write('+ ');
+			end;
 			writeln();
 			end;
-		write('Masukkan bahan yang ingin dibuat : '); readln(s);	
+		writeln('Ketik cancel untuk  membatalkan');
+		write('Masukkan bahan yang ingin dibuat : '); 
+		readln(s);
+			if (s='cancel') then
+			writeln('Olah bahan dibatalkan')
+		else
+		begin	
 		cariBO(found,iBO,dataBahanOlahan,s);
 		write('Berapa banyak yang ingin dibuat? : ');readln(jumlah);
 		for i:=1 to inventoriBahanOlahan.banyakItem do
@@ -78,7 +88,7 @@ implementation
 			BO:=dataBahanOlahan.itemKe[iBO];
 			cekBM(dataBahanMentah,BO,found,q,jumlah);
 				if not(found) then
-					writeln('Bahan mentah tak ditemukan!')
+					writeln('Olah bahan gagal')
 				else if not(q) then
 					writeln('Bahan mentah tak cukup!')
 				else
@@ -111,6 +121,7 @@ implementation
 			writeln('Bahan olahan tidak ditemukan!')
 		else if (stok+jumlah>dataSimulasi.itemKe[ID].kapasitasMaxInventori) then
 			writeln('Jumlah bahan olahan melebihi kapasitas!');
+		end;
 	end;
 	
 	procedure cariBM(var dataBahanMentah : tabelBahanMentah; 

@@ -41,11 +41,30 @@ implementation
 		j:=1;
 		nBO:=0;
 		nBM:=0;
+		writeln('Resep yang tersedia: ');
+		for i:=1 to dataResep.banyakItem do
+			begin
+			write(dataResep.itemKe[i].nama,'<-- ');
+			for j:=1 to dataResep.itemKe[i].banyakBahan do
+			begin
+				write(dataResep.itemKe[i].bahan[j],' ');
+				if j<dataResep.itemKe[i].banyakBahan then
+				write('+ ');
+			end;
+			writeln();
+			end;
+		writeln('Ketik cancel untuk  membatalkan');
 		writeln('Tuliskan resep yang ingin dijual');
 		readln(s);
+		if (s='cancel') then
+			writeln('Olah resep dibatalkan')
+		else
+		begin
 		cariR(foundResep,iR,dataResep,s);
 		if (foundResep) then
 			begin
+			i:=1;
+			j:=1;
 				repeat
 				s:=dataResep.itemKe[iR].bahan[i];
 				cariBM(dataBahanMentah, s, foundBM, x);
@@ -77,6 +96,7 @@ implementation
 			end
 		else
 		writeln('Resep Tidak Ditemukan!');
+		end;
 	end;
 	
 	
