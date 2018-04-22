@@ -48,6 +48,8 @@ implementation
 		dataSimulasi.itemKe[ID].jumlahHariHidup	:= 1;
 		dataSimulasi.itemKe[ID].jumlahDuit		:= 2000000;
 		dataInventoriBahanOlahan.banyakItem		:= 0;
+		jmlMakan := 0;
+		jmlIstirahat := 0;
 		
 		tampilkanMenu('startSimulasi');	
 		
@@ -55,8 +57,7 @@ implementation
 			{inisialisasi} 
 			stopSimulasi := false;
 			dataSimulasi.itemKe[ID].isTidur 		:= false;
-			jmlMakan := 0;
-			jmlIstirahat := 0;
+
 			
 			{antarmuka}
 			writeln('--------------------------------------------------');

@@ -103,6 +103,7 @@ implementation
 						inventoriBahanOlahan.itemKe[index].hargaJual:=BO.hargaJual;
 					dec(dataSimulasi.itemKe[ID].jumlahEnergi);
 					writeln('Bahan olahan ',dataBahanOlahan.itemKe[iBO].nama,' telah dibuat!');
+					writeln('Tanggal Kadaluarsa: ',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.hari,'/',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.bulan,'/',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.tahun);
 					end;
 			end
 		else if not(found) then
@@ -182,8 +183,7 @@ implementation
 									var BO : bahanOlahan;
 									var found : boolean;
 									var jumlah : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengurangi jumlah Bahan Mentah yang tersedia setelah dipakai }
 	var
 	i, x : integer;
 	begin

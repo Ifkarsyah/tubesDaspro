@@ -64,6 +64,7 @@ implementation
 						inventoriBahanMentah.banyakItem:= inventoriBahanMentah.banyakItem+1;
 						dataSimulasi.itemKe[ID].totalPengeluaran:= dataSimulasi.itemKe[ID].totalPengeluaran+ dataBahanMentah.itemKe[i].hargaBeli*kuantitas;
 						dataSimulasi.itemKe[ID].jumlahEnergi := dataSimulasi.itemKe[ID].jumlahEnergi-1;
+						writeln('Tanggal Kadaluarsa: ',inventoriBahanMentah.itemKe[index].tanggalKadaluarsa.hari,'/',inventoriBahanMentah.itemKe[index].tanggalKadaluarsa.bulan,'/',inventoriBahanMentah.itemKe[index].tanggalKadaluarsa.tahun);
 					end else
 					begin
 						writeln('Total harga: ', dataBahanMentah.itemKe[i].hargaBeli*kuantitas);
