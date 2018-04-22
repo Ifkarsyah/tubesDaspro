@@ -7,16 +7,14 @@ uses uP1_tipeBentukan, uP3_Umum, uF6_OlahBahan;
 	procedure mainJualOlahan(ID : integer;
 									var dataBahanOlahan : tabelBahanOlahan;  
 									var dataSimulasi : tabelSimulasi); 
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Menjual bahan olahan }
 	
 implementation
 
 	procedure mainJualOlahan(ID : integer;
 									var dataBahanOlahan : tabelBahanOlahan; 
 									var dataSimulasi : tabelSimulasi); 
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Menjual bahan olahan }
 	var
 	found : boolean;
 	iBO, n : integer;

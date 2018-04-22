@@ -9,37 +9,32 @@ uses uP1_tipeBentukan, uP3_Umum;
 									var dataBahanOlahan : tabelBahanOlahan;  
 									var dataSimulasi : tabelSimulasi;
 									var inventoriBahanOlahan : tabelBahanOlahan); 
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengolah bahan mentah menjadi bahan olahan }
 	
 	procedure cariBM(var dataBahanMentah : tabelBahanMentah; 
 									var s : string;
 									var found : boolean;
 									var iBM : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mencari bahan mentah dan meng-output indeksnya }
 	
 	procedure cekBM(var dataBahanMentah : tabelBahanMentah; 
 									var BO : bahanOlahan;
 									var found : boolean;
 									var q : boolean;
 									var jumlah : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengecek bahan mentah apakah cukup jumlahnya }
 	
 	procedure kurangiBM(var dataBahanMentah : tabelBahanMentah; 
 									var BO : bahanOlahan;
 									var found : boolean;
 									var jumlah : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengurangi bahan mentah sesuai jumlah yang diminta }
 	
 	procedure cariBO(var found : boolean; 
 									var iBO : integer;
 									var dataBahanOlahan : tabelBahanOlahan;
 									var s : string);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mencari bahan olahan dan meng-output indeksnya }
 	
 implementation
 
@@ -48,8 +43,7 @@ implementation
 									var dataBahanOlahan : tabelBahanOlahan; 
 									var dataSimulasi : tabelSimulasi;
 									var inventoriBahanOlahan : tabelBahanOlahan); 
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengolah bahan mentah menjadi bahan olahan }
 	var
 	found,q : boolean;
 	i, iBO, index, j, jumlah, stok : integer;
@@ -128,8 +122,7 @@ implementation
 									var s : string;
 									var found : boolean;
 									var iBM : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}	
+	{ Mencari bahan mentah dan meng-output indeksnya }	
 	var
 	i : integer;
 	begin
@@ -149,8 +142,7 @@ implementation
 									var iBO : integer;
 									var dataBahanOlahan : tabelBahanOlahan;
 									var s : string);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mencari bahan olahan dan meng-output indeksnya }
 	var
 	i : integer;
 	begin
@@ -171,8 +163,7 @@ implementation
 									var found : boolean;
 									var q : boolean;
 									var jumlah : integer);
-	{ I.S : Bagaimana keadaan awal dari tiap variabel pada parameter?
-	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
+	{ Mengecek bahan mentah apakah cukup jumlahnya }
 	var
 	i, x : integer;
 	begin
