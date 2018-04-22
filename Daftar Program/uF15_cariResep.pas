@@ -33,7 +33,6 @@ implementation
 		{Menuliskan hasil pencarian, jika ditulisan resepNya jika tidak dituliskan pesan kesalahan}
 		if(resepAda) then
 		begin
-			i:=i-1;
 			writeln('Resep ditemukan');
 			writeln(dataResep.itemKe[i].nama);
 			writeln('harga jual : ',dataResep.itemKe[i].hargaJual);

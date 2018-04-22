@@ -1,9 +1,10 @@
 unit uF11_tidur;
 
 interface
-uses uP1_tipeBentukan, uP3_Umum;
+uses uP1_tipeBentukan, uP3_Umum, uB4_restock;
 
-	procedure mainTidur(var dataSimulasi : tabelSimulasi; 
+	procedure mainTidur(dataBahanMentah : tabelBahanMentah;
+						var dataSimulasi : tabelSimulasi; 
 						var dataInventoriBahanMentah : tabelBahanMentah; 
 						var dataInventoriBahanOlahan : tabelBahanOlahan;ID : integer;
 						var jmlMakan : integer; var jmlIstirahat : integer);
@@ -16,7 +17,8 @@ uses uP1_tipeBentukan, uP3_Umum;
 
 implementation
 
-	procedure mainTidur(var dataSimulasi : tabelSimulasi; 
+	procedure mainTidur(dataBahanMentah : tabelBahanMentah;
+						var dataSimulasi : tabelSimulasi; 
 						var dataInventoriBahanMentah : tabelBahanMentah; 
 						var dataInventoriBahanOlahan : tabelBahanOlahan; 
 						ID : integer;
@@ -32,6 +34,9 @@ implementation
 		begin
 			//hapusKadaluarsa(dataInventoriBahanMentah, dataInventoriBahanOlahan, ID); TO DO : BIKIN
 			resetDay(dataSimulasi.itemKe[ID].tanggalSimulasi, dataSimulasi.itemKe[ID].jumlahEnergi, dataSimulasi.itemKe[ID].jumlahHariHidup, jmlMakan, jmlIstirahat);
+			//mengecek untuk melakukan restock atau tidak
+			if(dataSimulasi.itemKe[ID].jumlahHariHidup mod 3 = 0) then
+				mainRestock(ID, dataSimulasi, dataBahanMentah, dataInventoriBahanMentah);
 		end;
 	end;
 

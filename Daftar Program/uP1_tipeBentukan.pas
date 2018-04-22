@@ -35,7 +35,7 @@ interface
 			tanggalSimulasi			: tanggal;
 			jumlahHariHidup			: integer;
 			jumlahEnergi			: integer;
-			jumlahDuit				: integer;
+			jumlahDuit				: longint;
 			kapasitasMaxInventori	: integer;
 			totalBahanMentahDibeli	: integer;
 			totalBahanOlahanDibuat	: integer;
