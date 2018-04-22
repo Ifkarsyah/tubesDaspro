@@ -33,6 +33,7 @@ implementation
 			dataSimulasi.itemKe[ID].jumlahDuit:=dataSimulasi.itemKe[ID].jumlahDuit+dataBahanOlahan.itemKe[iBO].hargaJual;
 			dec(dataSimulasi.itemKe[ID].jumlahEnergi);
 			inc(dataSimulasi.itemKe[ID].totalBahanOlahanDijual);
+			dataSimulasi.itemKe[ID].totalPemasukan:=dataSimulasi.itemKe[ID].totalPemasukan+dataBahanOlahan.itemKe[iBO].hargaJual;
 			writeln('Bahan olahan ',dataBahanOlahan.itemKe[iBO].nama,' telah dijual!');
 			end
 		else if not(found) then
