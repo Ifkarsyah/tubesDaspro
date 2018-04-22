@@ -19,18 +19,21 @@ implementation
 	* F.S : Bagaimana keadaan akhir dari tiap variabel pada parameter?}
 	var
 	found : boolean;
-	iBO : integer;
+	iBO, n : integer;
 	BO : bahanOlahan;
 	s : string;
 	
 	begin
-		writeln('Masukkan bahan yang ingin dijual');
+		writeln('Masukkan bahan yang ingin dijual: ');
+		readln(s);
+		writeln('Berapa banyak yang ingin dijual?');
+		readln(n);
 		cariBO(found,iBO,dataBahanOlahan,s);
-		if (found) and (dataBahanOlahan.itemKe[iBO].jumlahTersedia>0) then
+		if (found) and (dataBahanOlahan.itemKe[iBO].jumlahTersedia>=n) then
 			begin
 			BO:=dataBahanOlahan.itemKe[iBO];
-			dec(BO.jumlahTersedia);
-			dataSimulasi.itemKe[ID].jumlahDuit:=dataSimulasi.itemKe[ID].jumlahDuit+dataBahanOlahan.itemKe[iBO].hargaJual;
+			BO.jumlahTersedia:=BO.jumlahTersedia-n;
+			dataSimulasi.itemKe[ID].jumlahDuit:=dataSimulasi.itemKe[ID].jumlahDuit+(dataBahanOlahan.itemKe[iBO].hargaJual*n);
 			dec(dataSimulasi.itemKe[ID].jumlahEnergi);
 			inc(dataSimulasi.itemKe[ID].totalBahanOlahanDijual);
 			dataSimulasi.itemKe[ID].totalPemasukan:=dataSimulasi.itemKe[ID].totalPemasukan+dataBahanOlahan.itemKe[iBO].hargaJual;
@@ -38,8 +41,8 @@ implementation
 			end
 		else if not(found) then
 			writeln('Bahan olahan tidak ditemukan!')
-		else if (dataBahanOlahan.itemKe[iBO].jumlahTersedia<=25) then
-			writeln('Jumlah bahan olahan habis!');
+		else if (dataBahanOlahan.itemKe[iBO].jumlahTersedia<n) then
+			writeln('Jumlah bahan olahan tidak mencukupi!');
 	end;
 
 end.
