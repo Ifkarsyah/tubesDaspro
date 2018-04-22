@@ -102,6 +102,7 @@ implementation
 						inc(inventoriBahanOlahan.banyakItem); 
 						inventoriBahanOlahan.itemKe[index].hargaJual:=BO.hargaJual;
 					dec(dataSimulasi.itemKe[ID].jumlahEnergi);
+					inc(dataSimulasi.itemKe[ID].totalBahanOlahanDibuat);
 					writeln('Bahan olahan ',dataBahanOlahan.itemKe[iBO].nama,' telah dibuat!');
 					writeln('Tanggal Kadaluarsa: ',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.hari,'/',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.bulan,'/',inventoriBahanOlahan.itemKe[iBO].tanggalKadaluarsa.tahun);
 					end;
